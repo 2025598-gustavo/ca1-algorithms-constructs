@@ -5,6 +5,7 @@ public interface FoodStorage {
     void removeFood();
     void peekFood();
     void displayFood();
+    void size();
     boolean isEmpty();
     boolean isFull();
 }
