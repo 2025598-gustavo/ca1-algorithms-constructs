@@ -24,6 +24,7 @@ public class Queue implements FoodStorage {
         return rear == size - 1;
     }
 
+    @Override
     public void addFood(Food food) {
         if (isFull()) {
             System.out.println("Storage is full!");
