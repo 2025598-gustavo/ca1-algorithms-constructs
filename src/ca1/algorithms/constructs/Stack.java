@@ -1,102 +1,78 @@
 package ca1.algorithms.constructs;
 
-import java.util.Scanner;
+import ca1.algorithms.constructs.repository.Food;
+import ca1.algorithms.constructs.repository.FoodStorage;
 
-public class Stack {
+public class Stack implements FoodStorage {
 
-    private int[] arr;
+    private Food[] stack;
     private int top;
     private int capacity;
 
     public Stack(int size) {
-        arr = new int[size];
+        stack = new Food[size];
         capacity = size;
         top = -1;
     }
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("Enter stack size: ");
-        int size = sc.nextInt();
-
-        Stack stack = new Stack(size);
-
-        while (true) {
-            System.out.println("\n--- Stack Menu ---");
-            System.out.println("1. Push");
-            System.out.println("2. Pop");
-            System.out.println("3. Peek");
-            System.out.println("4. Display Stack");
-            System.out.println("5. Exit");
-            System.out.print("Enter your choice: ");
-            int choice = sc.nextInt();
-
-            switch (choice) {
-                case 1:
-                    System.out.print("Enter value to push: ");
-                    int val = sc.nextInt();
-                    stack.push(val);
-                    break;
-                case 2:
-                    int popped = stack.pop();
-                    if (popped != -1) System.out.println("Popped: " + popped);
-                    break;
-                case 3:
-                    int top = stack.peek();
-                    if (top != -1) System.out.println("Top element: " + top);
-                    break;
-                case 4:
-                    stack.display();
-                    break;
-                case 5:
-                    System.out.println("Exiting program.");
-                    sc.close();
-                    return;
-                default:
-                    System.out.println("Invalid choice, try again.");
-            }
-        }
-    }
-
-    public void push(int x) {
+    @Override
+    public void addFood(Food food) {
         if (top == capacity - 1) {
-            System.out.println("Stack Overflow");
+            System.out.println("Storage is full!");
             return;
         }
-        arr[++top] = x;
-        System.out.println(x + " pushed to stack.");
+        stack[++top] = food;
+        System.out.println("Food added: " + food.getName());
     }
 
-    public int pop() {
+    @Override
+    public void removeFood() {
         if (top == -1) {
-            System.out.println("Stack Underflow");
-            return -1;
+            System.out.println("Storage is empty!");
+            return;
         }
-        return arr[top--];
+        Food food = stack[top--];
+        System.out.println("Food removed: " + food);
     }
 
-    public int peek() {
+    @Override
+    public void peekFood() {
         if (top == -1) {
             System.out.println("Stack is empty");
-            return -1;
+            return;
         }
-        return arr[top];
+        System.out.println("Top item: " + stack[top]);
     }
 
+    @Override
     public boolean isEmpty() {
         return top == -1;
     }
 
-    public void display() {
+    @Override
+    public boolean isFull() {
+        return false;
+    }
+
+    @Override
+    public void displayFood() {
         if (top == -1) {
-            System.out.println("Stack is empty.");
+            System.out.println("Stack is empty!");
             return;
         }
-        System.out.print("Stack elements: ");
+        System.out.print("\n--- Stack elements contents ---");
         for (int i = 0; i <= top; i++) {
-            System.out.print(arr[i] + " ");
+            System.out.print(stack[i] + " ");
         }
         System.out.println();
+    }
+
+    @Override
+    public void size() {
+        if (isEmpty()) {
+            System.out.println("Storage size: 0");
+        } else {
+            System.out.println("Storage size: " + (top + 1));
+        }
     }
 }
