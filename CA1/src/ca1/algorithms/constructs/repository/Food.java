@@ -1,13 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package ca1.algorithms.constructs.repository;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
  * @author Gustavo
  */
 public interface Food {
-    
+    String getName();
+    double getWeight();
+    LocalDate getBestBefore();
+    LocalDateTime getTimeStored();
 }
