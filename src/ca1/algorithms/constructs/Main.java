@@ -23,18 +23,14 @@ public class Main {
             int type = sc.nextInt();
 
             switch (type) {
-                case 1:
-                    storage = new Queue(8);
-                    break;
-                case 2:
-                    storage = new Stack(8);
-                    break;
-                case 3:
+                case 1 -> storage = new Queue(8);
+                case 2 -> storage = new Stack(8);
+                case 3 -> {
                     System.out.println("Exiting program...");
                     sc.close();
                     return;
-                default:
-                    System.out.println("Invalid choice! Please try again.");
+                }
+                default -> System.out.println("Invalid choice! Please try again.");
             }
         }
 
