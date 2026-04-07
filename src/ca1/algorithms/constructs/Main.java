@@ -32,7 +32,7 @@ public class Main {
                 case 3:
                     System.out.println("Exiting program...");
                     sc.close();
-                    return; // termina a main
+                    return;
                 default:
                     System.out.println("Invalid choice! Please try again.");
             }
@@ -51,22 +51,17 @@ public class Main {
             sc.nextLine();
 
             switch (choice) {
-
-                case 1:
+                case 1 -> {
                     System.out.print("Food name: ");
                     String name = sc.nextLine();
-
                     System.out.print("Weight (g): ");
                     double weight = sc.nextDouble();
                     sc.nextLine();
-
                     System.out.print("Best-before (YYYY-MM-DD): ");
                     String dateStr = sc.nextLine();
-
                     try {
                         LocalDate date = LocalDate.parse(dateStr);
 
-                        // validação 2 semanas
                         if (date.isAfter(LocalDate.now().plusDays(14))) {
                             System.out.println("Error: max 2 weeks allowed!");
                             break;
@@ -78,27 +73,16 @@ public class Main {
                     } catch (Exception e) {
                         System.out.println("Invalid date format!");
                     }
-                    break;
-
-                case 2:
-                    storage.removeFood();
-                    break;
-
-                case 3:
-                    storage.peekFood();
-                    break;
-
-                case 4:
-                    storage.displayFood();
-                    break;
-
-                case 5:
+                }
+                case 2 -> storage.removeFood();
+                case 3 -> storage.peekFood();
+                case 4 -> storage.displayFood();
+                case 5 -> {
                     System.out.println("Exiting...");
                     sc.close();
                     return;
-
-                default:
-                    System.out.println("Invalid option!");
+                }
+                default -> System.out.println("Invalid option!");
             }
         }
     }
