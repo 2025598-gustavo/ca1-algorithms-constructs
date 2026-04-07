@@ -1,4 +1,4 @@
-package ca1.algorithms.constructs;
+package ca1.algorithms.constructs.model;
 
 import ca1.algorithms.constructs.repository.Food;
 
