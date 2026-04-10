@@ -26,7 +26,7 @@ public class Stack implements FoodStorage {
             return;
         }
         stack[++top] = food;
-        System.out.println("Food added: " + food.getName());
+        System.out.println("Food added: " + food);
     }
 
     @Override
