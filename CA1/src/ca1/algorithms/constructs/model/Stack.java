@@ -55,7 +55,7 @@ public class Stack implements FoodStorage {
 
     @Override
     public boolean isFull() {
-        return false;
+        return top == capacity - 1;
     }
 
     @Override
