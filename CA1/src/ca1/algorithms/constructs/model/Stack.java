@@ -9,9 +9,9 @@ import ca1.algorithms.constructs.repository.Food;
  */
 public class Stack implements FoodStorage {
 
-    private Food[] stack;
+    private final Food[] stack;
     private int top;
-    private int capacity;
+    private final int capacity;
 
     public Stack(int size) {
         stack = new Food[size];

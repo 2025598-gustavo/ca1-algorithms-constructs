@@ -8,8 +8,9 @@ import ca1.algorithms.constructs.repository.Food;
  * @author Gustavo
  */
 public class Queue implements FoodStorage {
-    private Food[] queue;
-    private int front, rear, size;
+    private final Food[] queue;
+    private final int size;
+    private int front, rear;
 
     public Queue(int size) {
         this.size = size;

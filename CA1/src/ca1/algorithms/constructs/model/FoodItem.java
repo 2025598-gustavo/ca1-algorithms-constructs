@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
  */
 public class FoodItem implements Food {
 
-    private String name;
-    private double weight;
-    private LocalDate bestBefore;
-    private LocalDateTime timeStored;
+    private final String name;
+    private final double weight;
+    private final LocalDate bestBefore;
+    private final LocalDateTime timeStored;
 
     public FoodItem(String name, double weight, LocalDate bestBefore) {
         this.name = name;
