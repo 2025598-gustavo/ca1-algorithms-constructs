@@ -44,7 +44,8 @@ public static void main(String[] args) {
             System.out.println("2. Remove Food");
             System.out.println("3. Peek");
             System.out.println("4. Display");
-            System.out.println("5. Exit");
+            System.out.println("5. Search Food");
+            System.out.println("6. Exit");
             System.out.print("Choice: ");
 
             int choice = sc.nextInt();
@@ -77,7 +78,8 @@ public static void main(String[] args) {
                 case 2 -> storage.removeFood();
                 case 3 -> storage.peekFood();
                 case 4 -> storage.displayFood();
-                case 5 -> {
+                case 5 -> searchFood(sc, storage);
+                case 6 -> {
                     System.out.println("Exiting...");
                     sc.close();
                     return;
@@ -85,5 +87,11 @@ public static void main(String[] args) {
                 default -> System.out.println("Invalid option!");
             }
         }
+    }
+
+    public static void searchFood(Scanner sc, FoodStorage storage) {
+        System.out.print("Enter food name to search: ");
+        String search = sc.nextLine();
+        storage.searchFood(search);
     }
 }
