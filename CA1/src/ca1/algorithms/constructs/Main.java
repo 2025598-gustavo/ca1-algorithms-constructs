@@ -53,29 +53,7 @@ public static void main(String[] args) {
             sc.nextLine();
 
             switch (choice) {
-                case 1 -> {
-                    System.out.print("Food name: ");
-                    String name = sc.nextLine();
-                    System.out.print("Weight (g): ");
-                    double weight = sc.nextDouble();
-                    sc.nextLine();
-                    System.out.print("Best-before (YYYY-MM-DD): ");
-                    String dateStr = sc.nextLine();
-                    try {
-                        LocalDate date = LocalDate.parse(dateStr);
-
-                        if (date.isAfter(LocalDate.now().plusDays(14))) {
-                            System.out.println("Error: max 2 weeks allowed!");
-                            break;
-                        }
-
-                        Food food = new FoodItem(name, weight, date);
-                        storage.addFood(food);
-
-                    } catch (Exception e) {
-                        System.out.println("Invalid date format!");
-                    }
-                }
+                case 1 -> addFood(sc, storage);
                 case 2 -> storage.removeFood();
                 case 3 -> storage.peekFood();
                 case 4 -> storage.displayFood();
@@ -88,6 +66,39 @@ public static void main(String[] args) {
                 }
                 default -> System.out.println("Invalid option!");
             }
+        }
+    }
+
+    private static void addFood(Scanner sc, FoodStorage storage) {
+        System.out.print("Food name: ");
+        String name = sc.nextLine();
+        System.out.print("Weight (g): ");
+
+        if (!sc.hasNextDouble()) {
+            System.out.println("Invalid weight! Please enter a number.");
+            sc.nextLine();
+            return;
+        }
+
+        double weight = sc.nextDouble();
+        sc.nextLine();
+        System.out.print("Best-before (YYYY-MM-DD): ");
+        String dateStr = sc.nextLine();
+
+        try {
+            LocalDate date = LocalDate.parse(dateStr);
+
+            // validation 2 weeks
+            if (date.isAfter(LocalDate.now().plusDays(14))) {
+                System.out.println("Error: max 2 weeks allowed!");
+                return;
+            }
+
+            Food food = new FoodItem(name, weight, date);
+            storage.addFood(food);
+
+        } catch (Exception e) {
+            System.out.println("Invalid date format!");
         }
     }
 
