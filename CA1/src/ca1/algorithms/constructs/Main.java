@@ -45,7 +45,8 @@ public static void main(String[] args) {
             System.out.println("3. Peek");
             System.out.println("4. Display");
             System.out.println("5. Search Food");
-            System.out.println("6. Exit");
+            System.out.println("6. Show Storage Size");
+            System.out.println("7. Exit");
             System.out.print("Choice: ");
 
             int choice = sc.nextInt();
@@ -79,7 +80,8 @@ public static void main(String[] args) {
                 case 3 -> storage.peekFood();
                 case 4 -> storage.displayFood();
                 case 5 -> searchFood(sc, storage);
-                case 6 -> {
+                case 6 -> storage.size();
+                case 7 -> {
                     System.out.println("Exiting...");
                     sc.close();
                     return;

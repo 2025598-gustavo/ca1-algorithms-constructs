@@ -104,7 +104,7 @@ public class Queue implements FoodStorage {
     @Override
     public void size() {
         if (isEmpty()) {
-            System.out.println("Storage size: 0");
+            System.out.println("No items in storage.");
         } else {
             System.out.println("Storage size: " + (rear - front + 1));
         }
