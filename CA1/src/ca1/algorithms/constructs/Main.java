@@ -24,9 +24,11 @@ public static void main(String[] args) {
             System.out.println("2. Stack (LIFO)");
             System.out.println("3. Exit");
             System.out.print("Choice: ");
-            int type = sc.nextInt();
 
-            switch (type) {
+            // Validation input
+            int choice = validationInput(sc);
+
+            switch (choice) {
                 case 1 -> storage = new Queue(8);
                 case 2 -> storage = new Stack(8);
                 case 3 -> {
@@ -49,8 +51,8 @@ public static void main(String[] args) {
             System.out.println("7. Exit");
             System.out.print("Choice: ");
 
-            int choice = sc.nextInt();
-            sc.nextLine();
+            // Validation input
+            int choice = validationInput(sc);
 
             switch (choice) {
                 case 1 -> addFood(sc, storage);
@@ -106,5 +108,19 @@ public static void main(String[] args) {
         System.out.print("Enter food name to search: ");
         String search = sc.nextLine();
         storage.searchFood(search);
+    }
+    
+    public static int validationInput(Scanner sc){
+        while(true) {
+            if (!sc.hasNextInt()) {
+                System.out.println("Invalid input! Please enter a number.");
+                sc.nextLine();
+                continue;
+             }
+
+            int choice = sc.nextInt();
+            sc.nextLine();
+            return choice;
+        }
     }
 }
