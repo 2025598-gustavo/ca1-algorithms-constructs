@@ -106,7 +106,8 @@ public class Queue implements FoodStorage {
         if (isEmpty()) {
             System.out.println("No items in storage.");
         } else {
-            System.out.println("Storage size: " + (rear - front + 1));
+            System.out.println("Storage contains " + (rear - front + 1) + 
+                    " item(s).");
         }
     }
 }

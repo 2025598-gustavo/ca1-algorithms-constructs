@@ -95,9 +95,9 @@ public class Stack implements FoodStorage {
     @Override
     public void size() {
         if (isEmpty()) {
-            System.out.println("Storage size: 0");
+            System.out.println("No items in storage.");
         } else {
-            System.out.println("Storage size: " + (top + 1));
+            System.out.println("Storage contains " + (top + 1) + " item(s).");
         }
     }
 }
