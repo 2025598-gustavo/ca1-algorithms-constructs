@@ -6,6 +6,7 @@ import ca1.algorithms.constructs.model.Stack;
 import ca1.algorithms.constructs.repository.Food;
 import ca1.algorithms.constructs.repository.FoodStorage;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
@@ -19,9 +20,15 @@ public static void main(String[] args) {
         FoodStorage storage = null;
 
         while (storage == null) {
+            System.out.println("\n=========================== "
+                    +          "\n Restaurant Storage System "
+                    +          "\n===========================");
+            
+            System.out.println("\n======== Main Menu ========");
+            
             System.out.println("Choose Storage Type:");
-            System.out.println("1. Queue (FIFO)");
-            System.out.println("2. Stack (LIFO)");
+            System.out.println("1. Stack (LIFO)");
+            System.out.println("2. Queue (FIFO)");
             System.out.println("3. Exit");
             System.out.print("Choice: ");
 
@@ -29,8 +36,8 @@ public static void main(String[] args) {
             int choice = validationInput(sc);
 
             switch (choice) {
-                case 1 -> storage = new Queue(8);
-                case 2 -> storage = new Stack(8);
+                case 1 -> storage = new Stack(8);
+                case 2 -> storage = new Queue(8);
                 case 3 -> {
                     System.out.println("Exiting program...");
                     sc.close();
@@ -41,7 +48,7 @@ public static void main(String[] args) {
         }
 
         while (true) {
-            System.out.println("\n--- MENU ---");
+            System.out.println("\n========= Storage =========");
             System.out.println("1. Add Food");
             System.out.println("2. Remove Food");
             System.out.println("3. View top item (Peek)");
@@ -70,6 +77,7 @@ public static void main(String[] args) {
     }
 
     private static void addFood(Scanner sc, FoodStorage storage) {
+        System.out.println("\n---------- Add Food ----------");
         System.out.print("Food name: ");
         String name = sc.nextLine();
         System.out.print("Weight (g): ");
@@ -82,23 +90,32 @@ public static void main(String[] args) {
 
         double weight = sc.nextDouble();
         sc.nextLine();
-        System.out.print("Best-before (YYYY-MM-DD): ");
-        String dateStr = sc.nextLine();
 
-        try {
-            LocalDate date = LocalDate.parse(dateStr);
+        LocalDate date = readDate(sc);
 
-            // validation 2 weeks
-            if (date.isAfter(LocalDate.now().plusDays(14))) {
-                System.out.println("Error: max 2 weeks allowed!");
-                return;
+        Food food = new FoodItem(name, weight, date);
+        storage.addFood(food);
+    }
+    
+        private static LocalDate readDate(Scanner sc) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        while (true) {
+            System.out.print("Best-before (DD-MM-YYYY): ");
+            String input = sc.nextLine();
+
+            try {
+                LocalDate date = LocalDate.parse(input, formatter);
+
+                if (date.isAfter(LocalDate.now().plusDays(14))) {
+                    System.out.println("Error: max 2 weeks allowed!");
+                    continue;
+                }
+
+                return date;
+            } catch (Exception e) {
+                System.out.println("Invalid date format! Use DD-MM-YYYY.");
             }
-
-            Food food = new FoodItem(name, weight, date);
-            storage.addFood(food);
-
-        } catch (Exception e) {
-            System.out.println("Invalid date format!");
         }
     }
     

@@ -3,6 +3,7 @@ package ca1.algorithms.constructs.model;
 import ca1.algorithms.constructs.repository.Food;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -45,6 +46,14 @@ public class FoodItem implements Food {
 
     @Override
     public String toString() {
-        return "Name: " + name + " | Weight: " + weight + "g | Exp: " + bestBefore + " | Stored: " + timeStored;
+        DateTimeFormatter dateFormatter = 
+                DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter dateTimeFormatter = 
+                DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
+        return "Name: " + name +
+               " | Weight: " + weight + "g" +
+               " | Exp: " + bestBefore.format(dateFormatter) +
+               " | Stored: " + timeStored.format(dateTimeFormatter);
     }
 }
