@@ -70,27 +70,6 @@ public class Stack implements FoodStorage {
         }
         System.out.println();
     }
-    
-    @Override
-    public void searchFood(String name) {
-        if (isEmpty()) {
-            System.out.println("Storage is empty!");
-            return;
-        }
-
-        boolean found = false;
-
-        for (int i = 0; i <= top; i++) {
-            if (stack[i].getName().equalsIgnoreCase(name)) {
-                System.out.println("Found: " + stack[i]);
-                found = true;
-            }
-        }
-
-        if (!found) {
-            System.out.println("Food not found.");
-        }
-    }
 
     @Override
     public void size() {

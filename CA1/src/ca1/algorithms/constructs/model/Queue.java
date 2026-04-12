@@ -79,27 +79,6 @@ public class Queue implements FoodStorage {
             System.out.println();
         }
     }
-    
-    @Override
-    public void searchFood(String name) {
-        if (isEmpty()) {
-            System.out.println("Storage is empty!");
-            return;
-        }
-
-        boolean found = false;
-
-        for (int i = front; i <= rear; i++) {
-            if (queue[i].getName().equalsIgnoreCase(name)) {
-                System.out.println("Found: " + queue[i]);
-                found = true;
-            }
-        }
-
-        if (!found) {
-            System.out.println("Food not found.");
-        }
-    }
 
     @Override
     public void size() {
