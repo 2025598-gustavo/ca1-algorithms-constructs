@@ -44,8 +44,8 @@ public static void main(String[] args) {
             System.out.println("\n--- MENU ---");
             System.out.println("1. Add Food");
             System.out.println("2. Remove Food");
-            System.out.println("3. Peek");
-            System.out.println("4. Display");
+            System.out.println("3. View top item (Peek)");
+            System.out.println("4. Display all items");
             System.out.println("5. Show Storage Size");
             System.out.println("6. Exit");
             System.out.print("Choice: ");
