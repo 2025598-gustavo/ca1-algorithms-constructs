@@ -1,11 +1,9 @@
 package ca1.algorithms.constructs;
 
 import ca1.algorithms.constructs.enums.StorageTypeEnum;
-import ca1.algorithms.constructs.model.FoodItem;
-import ca1.algorithms.constructs.repository.Food;
 import ca1.algorithms.constructs.repository.FoodStorage;
+import ca1.algorithms.constructs.service.FoodService;
 import ca1.algorithms.constructs.validation.Validation;
-import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
@@ -74,7 +72,7 @@ public class Main {
                 int choice = Validation.readValidInt(sc);
 
                 switch (choice) {
-                case 1 -> addFood(sc, storage);
+                case 1 -> FoodService.addFood(sc, storage);
                 case 2 -> storage.removeFood();
                 case 3 -> storage.peekFood();
                 case 4 -> storage.displayFood();
@@ -88,17 +86,5 @@ public class Main {
                 }
             }
         }
-    }
-
-    private static void addFood(Scanner sc, FoodStorage storage) {
-        System.out.println("\n---------- Add Food ---------");
-        System.out.print("Food name: ");
-        String name = sc.nextLine();
-        
-        double weight = Validation.readValidDouble(sc);
-        LocalDate date = Validation.readValidDate(sc);
-
-        Food food = new FoodItem(name, weight, date);
-        storage.addFood(food);
     }
 }
