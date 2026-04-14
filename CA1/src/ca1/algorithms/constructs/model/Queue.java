@@ -39,7 +39,7 @@ public class Queue implements FoodStorage {
             }
             rear++;
             queue[rear] = food;
-            System.out.println("Food added: " + food);
+            System.out.println("Food added: \n" + food);
         }
     }
 
@@ -72,9 +72,9 @@ public class Queue implements FoodStorage {
         if (isEmpty()) {
             System.out.println("Storage is empty!");
         } else {
-            System.out.print("Storage contents: ");
+            System.out.print("\n-- Queue elements contents --\n");
             for (int i = front; i <= rear; i++) {
-                System.out.print(queue[i] + " ");
+                System.out.println(queue[i] + " ");
             }
             System.out.println();
         }

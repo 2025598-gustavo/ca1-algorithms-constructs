@@ -15,69 +15,81 @@ import java.util.Scanner;
  */
 public class Main {
 
-public static void main(String[] args) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         FoodStorage storage = null;
 
-        while (storage == null) {
-            System.out.println("\n=========================== "
-                    +          "\n Restaurant Storage System "
-                    +          "\n===========================");
-            
-            System.out.println("\n======== Main Menu ========");
-            
-            System.out.println("Choose Storage Type:");
-            System.out.println("1. Stack (LIFO)");
-            System.out.println("2. Queue (FIFO)");
-            System.out.println("3. Exit");
-            System.out.print("Choice: ");
-
-            // Validation input
-            int choice = validationInput(sc);
-
-            switch (choice) {
-                case 1 -> storage = new Stack(8);
-                case 2 -> storage = new Queue(8);
-                case 3 -> {
-                    System.out.println("Exiting program...");
-                    sc.close();
-                    return;
-                }
-                default -> System.out.println("Invalid choice! Please try again.");
-            }
-        }
-
         while (true) {
-            System.out.println("\n========= Storage =========");
-            System.out.println("1. Add Food");
-            System.out.println("2. Remove Food");
-            System.out.println("3. View top item (Peek)");
-            System.out.println("4. Display all items");
-            System.out.println("5. Show Storage Size");
-            System.out.println("6. Exit");
-            System.out.print("Choice: ");
+            String storageName = "";
+            while (storage == null) {
+                System.out.println("\n============================= "
+                        + "\n  Restaurant Storage System "
+                        + "\n=============================");
 
-            // Validation input
-            int choice = validationInput(sc);
+                System.out.println("\n========= Main Menu =========");
 
-            switch (choice) {
+                System.out.println("Choose Storage Type:");
+                System.out.println("1. Stack (LIFO)");
+                System.out.println("2. Queue (FIFO)");
+                System.out.println("3. Exit");
+                System.out.print("Choice: ");
+
+                // Validation input
+                int choice = validationInput(sc);
+                
+                switch (choice) {
+                    case 1 -> {
+                        storage = new Stack(8);
+                        storageName = "Stack Storage";
+                    }
+                    case 2 -> {
+                        storage = new Queue(8);
+                        storageName = "Queue Storage";
+                    }
+                    case 3 -> {
+                        System.out.println("Exiting program...");
+                        sc.close();
+                        return;
+                    }
+                    default ->
+                        System.out.println("Invalid choice! Please try again.");
+                }
+            }
+
+            boolean isBackToMenu = false;
+
+            while (!isBackToMenu) {
+                System.out.println("\n======= " + storageName + " =======");
+                System.out.println("1. Add Food");
+                System.out.println("2. Remove Food");
+                System.out.println("3. View top item (Peek)");
+                System.out.println("4. Display all items");
+                System.out.println("5. Show Storage Size");
+                System.out.println("6. Exit");
+                System.out.print("Choice: ");
+
+                // Validation input
+                int choice = validationInput(sc);
+
+                switch (choice) {
                 case 1 -> addFood(sc, storage);
                 case 2 -> storage.removeFood();
                 case 3 -> storage.peekFood();
                 case 4 -> storage.displayFood();
                 case 5 -> storage.size();
                 case 6 -> {
-                    System.out.println("Exiting...");
-                    sc.close();
-                    return;
+                    System.out.println("Returning to main menu...");
+                    storage = null; 
+                    isBackToMenu = true;
                 }
                 default -> System.out.println("Invalid option!");
+                }
             }
         }
     }
 
     private static void addFood(Scanner sc, FoodStorage storage) {
-        System.out.println("\n---------- Add Food ----------");
+        System.out.println("\n---------- Add Food ---------");
         System.out.print("Food name: ");
         String name = sc.nextLine();
         System.out.print("Weight (g): ");
@@ -96,8 +108,8 @@ public static void main(String[] args) {
         Food food = new FoodItem(name, weight, date);
         storage.addFood(food);
     }
-    
-        private static LocalDate readDate(Scanner sc) {
+
+    private static LocalDate readDate(Scanner sc) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         while (true) {
@@ -118,14 +130,14 @@ public static void main(String[] args) {
             }
         }
     }
-    
-    public static int validationInput(Scanner sc){
-        while(true) {
+
+    public static int validationInput(Scanner sc) {
+        while (true) {
             if (!sc.hasNextInt()) {
                 System.out.println("Invalid input! Please enter a number.");
                 sc.nextLine();
                 continue;
-             }
+            }
 
             int choice = sc.nextInt();
             sc.nextLine();

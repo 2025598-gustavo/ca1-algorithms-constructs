@@ -51,8 +51,7 @@ public class FoodItem implements Food {
         DateTimeFormatter dateTimeFormatter = 
                 DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
-        return "Name: " + name +
-               " | Weight: " + weight + "g" +
+        return "Name: " + name + " | Weight: " + weight + "g" +
                " | Exp: " + bestBefore.format(dateFormatter) +
                " | Stored: " + timeStored.format(dateTimeFormatter);
     }

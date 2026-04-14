@@ -26,7 +26,7 @@ public class Stack implements FoodStorage {
             return;
         }
         stack[++top] = food;
-        System.out.println("Food added: " + food);
+        System.out.println("Food added: \n" + food);
     }
 
     @Override
@@ -64,9 +64,9 @@ public class Stack implements FoodStorage {
             System.out.println("Stack is empty!");
             return;
         }
-        System.out.print("\n--- Stack elements contents ---");
+        System.out.print("\n-- Stack elements contents --\n");
         for (int i = 0; i <= top; i++) {
-            System.out.print(stack[i] + " ");
+            System.out.println(stack[i] + " ");
         }
         System.out.println();
     }
