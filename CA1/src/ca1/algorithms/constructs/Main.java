@@ -21,6 +21,9 @@ public class Main {
 
         while (true) {
             String storageName = "";
+            String addLabel = "";
+            String removeLabel = "";
+            
             while (storage == null) {
                 System.out.println("\n============================= "
                         + "\n  Restaurant Storage System "
@@ -41,10 +44,14 @@ public class Main {
                     case 1 -> {
                         storage = new Stack(8);
                         storageName = "Stack Storage";
+                        addLabel = "(Push)";
+                        removeLabel = "(Pop)";        
                     }
                     case 2 -> {
                         storage = new Queue(8);
                         storageName = "Queue Storage";
+                        addLabel = "(Enqueue)";
+                        removeLabel = "(Dequeue)";  
                     }
                     case 3 -> {
                         System.out.println("Exiting program...");
@@ -60,8 +67,8 @@ public class Main {
 
             while (!isBackToMenu) {
                 System.out.println("\n======= " + storageName + " =======");
-                System.out.println("1. Add Food");
-                System.out.println("2. Remove Food");
+                System.out.println("1. Add Food " + addLabel);
+                System.out.println("2. Remove Food " + removeLabel);
                 System.out.println("3. View top item (Peek)");
                 System.out.println("4. Display all items");
                 System.out.println("5. Show Storage Size");
