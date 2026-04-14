@@ -19,13 +19,10 @@ public class FoodService {
     
     public static void addFood(Scanner sc, FoodStorage storage) {
         System.out.println("\n---------- Add Food ---------");
-
         System.out.print("Food name: ");
         String name = sc.nextLine();
-
-        System.out.print("Weight (g): ");
+        
         double weight = Validation.readValidDouble(sc);
-
         LocalDate date = Validation.readValidDate(sc);
 
         Food food = new FoodItem(name, weight, date);
