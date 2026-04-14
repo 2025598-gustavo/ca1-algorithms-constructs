@@ -4,8 +4,8 @@ import ca1.algorithms.constructs.enums.StorageTypeEnum;
 import ca1.algorithms.constructs.model.FoodItem;
 import ca1.algorithms.constructs.repository.Food;
 import ca1.algorithms.constructs.repository.FoodStorage;
+import ca1.algorithms.constructs.validation.Validation;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
@@ -37,7 +37,7 @@ public class Main {
                 System.out.print("Choice: ");
 
                 // Validation input
-                int choice = validationInput(sc);
+                int choice = Validation.readValidInt(sc);
                 
                 switch (choice) {
                     case 1, 2 -> {
@@ -71,7 +71,7 @@ public class Main {
                 System.out.print("Choice: ");
 
                 // Validation input
-                int choice = validationInput(sc);
+                int choice = Validation.readValidInt(sc);
 
                 switch (choice) {
                 case 1 -> addFood(sc, storage);
@@ -94,56 +94,11 @@ public class Main {
         System.out.println("\n---------- Add Food ---------");
         System.out.print("Food name: ");
         String name = sc.nextLine();
-        System.out.print("Weight (g): ");
-
-        if (!sc.hasNextDouble()) {
-            System.out.println("Invalid weight! Please enter a number.");
-            sc.nextLine();
-            return;
-        }
-
-        double weight = sc.nextDouble();
-        sc.nextLine();
-
-        LocalDate date = readDate(sc);
+        
+        double weight = Validation.readValidDouble(sc);
+        LocalDate date = Validation.readValidDate(sc);
 
         Food food = new FoodItem(name, weight, date);
         storage.addFood(food);
-    }
-
-    private static LocalDate readDate(Scanner sc) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
-        while (true) {
-            System.out.print("Best-before (DD-MM-YYYY): ");
-            String input = sc.nextLine();
-
-            try {
-                LocalDate date = LocalDate.parse(input, formatter);
-
-                if (date.isAfter(LocalDate.now().plusDays(14))) {
-                    System.out.println("Error: max 2 weeks allowed!");
-                    continue;
-                }
-
-                return date;
-            } catch (Exception e) {
-                System.out.println("Invalid date format! Use DD-MM-YYYY.");
-            }
-        }
-    }
-
-    public static int validationInput(Scanner sc) {
-        while (true) {
-            if (!sc.hasNextInt()) {
-                System.out.println("Invalid input! Please enter a number.");
-                sc.nextLine();
-                continue;
-            }
-
-            int choice = sc.nextInt();
-            sc.nextLine();
-            return choice;
-        }
     }
 }
