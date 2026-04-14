@@ -1,8 +1,7 @@
 package ca1.algorithms.constructs;
 
+import ca1.algorithms.constructs.enums.StorageTypeEnum;
 import ca1.algorithms.constructs.model.FoodItem;
-import ca1.algorithms.constructs.model.Queue;
-import ca1.algorithms.constructs.model.Stack;
 import ca1.algorithms.constructs.repository.Food;
 import ca1.algorithms.constructs.repository.FoodStorage;
 import java.time.LocalDate;
@@ -41,17 +40,13 @@ public class Main {
                 int choice = validationInput(sc);
                 
                 switch (choice) {
-                    case 1 -> {
-                        storage = new Stack(8);
-                        storageName = "Stack Storage";
-                        addLabel = "(Push)";
-                        removeLabel = "(Pop)";        
-                    }
-                    case 2 -> {
-                        storage = new Queue(8);
-                        storageName = "Queue Storage";
-                        addLabel = "(Enqueue)";
-                        removeLabel = "(Dequeue)";  
+                    case 1, 2 -> {
+                        StorageTypeEnum type = StorageTypeEnum.fromChoice(choice);
+
+                        storage = type.create();
+                        storageName = type.getStorageName();
+                        addLabel = type.getAddLabel();
+                        removeLabel = type.getRemoveLabel();
                     }
                     case 3 -> {
                         System.out.println("Exiting program...");
