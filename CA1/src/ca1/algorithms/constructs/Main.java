@@ -39,7 +39,7 @@ public class Main {
                 System.out.println("3. Exit");
                 System.out.print("Choice: ");
 
-                // Validation input
+                // Read validated integer input
                 int choice = Validation.readValidInt(sc);
 
                 switch (choice) {
@@ -78,7 +78,7 @@ public class Main {
                 System.out.println("6. Exit");
                 System.out.print("Choice: ");
 
-                // Validation input
+                // Read validated integer input
                 int choice = Validation.readValidInt(sc);
 
                 switch (choice) {
