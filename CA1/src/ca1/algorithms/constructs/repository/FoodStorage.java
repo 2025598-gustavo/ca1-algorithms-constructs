@@ -1,8 +1,8 @@
 package ca1.algorithms.constructs.repository;
 
 /**
- *
- * @author Gustavo
+ * Interface representing storage behavior.
+ * Implemented by Stack and Queue.
  */
 public interface FoodStorage {
     void addFood(Food food);

@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
- *
- * @author Gustavo
+ * Interface representing a Food entity.
+ * Defines the required attributes for any food item.
  */
 public interface Food {
     String getName();

@@ -7,20 +7,25 @@ import ca1.algorithms.constructs.validation.Validation;
 import java.util.Scanner;
 
 /**
- *
- * @author Gustavo
+ * Main class that controls the entire application flow.
+ * It handles user interaction, menu navigation, and delegates operations
+ * to the appropriate services and data structures.
  */
 public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        FoodStorage storage = null;
+        FoodStorage storage = null; // Will hold either Stack or Queue implementation
 
+        // Main application loop (runs until user chooses to exit)
         while (true) {
+
+            // Dynamic labels depending on selected data structure
             String storageName = "";
             String addLabel = "";
             String removeLabel = "";
-            
+
+            // Main menu loop (forces user to select a storage type)
             while (storage == null) {
                 System.out.println("\n============================= "
                         + "\n  Restaurant Storage System "
@@ -36,12 +41,16 @@ public class Main {
 
                 // Validation input
                 int choice = Validation.readValidInt(sc);
-                
+
                 switch (choice) {
                     case 1, 2 -> {
+                        // Convert user choice into enum representation
                         StorageTypeEnum type = StorageTypeEnum.fromChoice(choice);
 
+                        // Create the selected data structure (Stack or Queue)
                         storage = type.create();
+
+                        // Load dynamic labels based on selected type
                         storageName = type.getStorageName();
                         addLabel = type.getAddLabel();
                         removeLabel = type.getRemoveLabel();
@@ -49,15 +58,16 @@ public class Main {
                     case 3 -> {
                         System.out.println("Exiting program...");
                         sc.close();
-                        return;
+                        return; // Terminates application
                     }
                     default ->
                         System.out.println("Invalid choice! Please try again.");
                 }
             }
 
-            boolean isBackToMenu = false;
+            boolean isBackToMenu = false; // Controls return to main menu
 
+            // Storage operation menu loop
             while (!isBackToMenu) {
                 System.out.println("\n======= " + storageName + " =======");
                 System.out.println("1. Add Food " + addLabel);
@@ -72,17 +82,17 @@ public class Main {
                 int choice = Validation.readValidInt(sc);
 
                 switch (choice) {
-                case 1 -> FoodService.addFood(sc, storage);
-                case 2 -> storage.removeFood();
-                case 3 -> storage.peekFood();
-                case 4 -> storage.displayFood();
-                case 5 -> storage.size();
-                case 6 -> {
-                    System.out.println("Returning to main menu...");
-                    storage = null; 
-                    isBackToMenu = true;
-                }
-                default -> System.out.println("Invalid option!");
+                    case 1 -> FoodService.addFood(sc, storage); // Delegate add logic
+                    case 2 -> storage.removeFood(); // Remove element
+                    case 3 -> storage.peekFood(); // View top/front element
+                    case 4 -> storage.displayFood(); // Show all items
+                    case 5 -> storage.size(); // Show number of items
+                    case 6 -> {
+                        System.out.println("Returning to main menu...");
+                        storage = null; // Reset storage to force re-selection
+                        isBackToMenu = true;
+                    }
+                    default -> System.out.println("Invalid option!");
                 }
             }
         }

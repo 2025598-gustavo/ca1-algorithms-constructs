@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ca1.algorithms.constructs.service;
 
 import ca1.algorithms.constructs.model.FoodItem;
@@ -12,20 +8,31 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
- *
- * @author Gustavo
+ * Service layer responsible for business logic related to food.
+ * Separates logic from the Main class.
  */
 public class FoodService {
-    
+
+    /**
+     * Handles the process of adding a food item.
+     * Includes input collection and validation.
+     * @param sc
+     * @param storage
+     */
     public static void addFood(Scanner sc, FoodStorage storage) {
         System.out.println("\n---------- Add Food ---------");
+
         System.out.print("Food name: ");
         String name = sc.nextLine();
-        
+
+        // Read validated inputs
         double weight = Validation.readValidDouble(sc);
         LocalDate date = Validation.readValidDate(sc);
 
+        // Create Food object
         Food food = new FoodItem(name, weight, date);
+
+        // Add to storage
         storage.addFood(food);
     }
 }

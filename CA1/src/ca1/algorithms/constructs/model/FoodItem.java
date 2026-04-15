@@ -6,11 +6,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- *
- * @author Gustavo
+ * Concrete implementation of Food interface.
+ * Represents a single food item stored in the system.
  */
 public class FoodItem implements Food {
 
+    // Immutable attributes (cannot be changed after creation)
     private final String name;
     private final double weight;
     private final LocalDate bestBefore;
@@ -20,9 +21,8 @@ public class FoodItem implements Food {
         this.name = name;
         this.weight = weight;
         this.bestBefore = bestBefore;
-        this.timeStored = LocalDateTime.now();
+        this.timeStored = LocalDateTime.now(); // Automatically set when created
     }
-
 
     @Override
     public String getName() {
@@ -44,11 +44,15 @@ public class FoodItem implements Food {
         return timeStored;
     }
 
+    /**
+     * Returns a formatted string representation of the food item.
+     * Uses custom date formatting for better readability.
+     */
     @Override
     public String toString() {
-        DateTimeFormatter dateFormatter = 
+        DateTimeFormatter dateFormatter =
                 DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        DateTimeFormatter dateTimeFormatter = 
+        DateTimeFormatter dateTimeFormatter =
                 DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
         return "Name: " + name + " | Weight: " + weight + "g" +

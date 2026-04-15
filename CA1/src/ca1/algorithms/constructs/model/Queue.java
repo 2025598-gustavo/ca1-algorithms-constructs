@@ -4,14 +4,19 @@ import ca1.algorithms.constructs.repository.FoodStorage;
 import ca1.algorithms.constructs.repository.Food;
 
 /**
- *
- * @author Gustavo
+ * Queue implementation using an array.
+ * This follows the FIFO (First In First Out) principle:
+ * The first element added is the first to be removed.
  */
 public class Queue implements FoodStorage {
-    private final Food[] queue;
-    private final int size;
-    private int front, rear;
+    private final Food[] queue; // Array to store food items
+    private final int size;     // Maximum capacity of the queue
+    private int front, rear;    // Pointers to track positions
 
+    /**
+     * Constructor initializes queue with given size.
+     * @param size
+     */
     public Queue(int size) {
         this.size = size;
         this.queue = new Food[size];
@@ -19,45 +24,69 @@ public class Queue implements FoodStorage {
         this.rear = -1;
     }
 
+    /**
+     * Checks if the queue is empty.
+     * @return true if empty, false otherwise
+     */
     @Override
     public boolean isEmpty() {
         return front == -1;
     }
 
+    /**
+     * Checks if the queue is full.
+     * @return true if full, false otherwise
+     */
     @Override
     public boolean isFull() {
         return rear == size - 1;
     }
 
+    /**
+     * Adds a food item to the rear of the queue.
+     * Time Complexity: O(1)
+     */
     @Override
     public void addFood(Food food) {
         if (isFull()) {
             System.out.println("Storage is full!");
         } else {
             if (front == -1) {
-                front = 0;
+                front = 0; // Initialize front when first element is added
             }
+            
             rear++;
             queue[rear] = food;
             System.out.println("Food added: \n" + food);
         }
     }
 
+    /**
+     * Removes a food item from the front of the queue.
+     * Time Complexity: O(1)
+     */
     @Override
     public void removeFood() {
         if (isEmpty()) {
             System.out.println("Storage is empty!");
         } else {
             Food food = queue[front];
+
+            // If only one element, reset queue
             if (front == rear) {
                 front = rear = -1; // Reset queue after last food is dequeued
             } else {
                 front++;
             }
+
             System.out.println("Food removed: " + food);
         }
     }
 
+    /**
+     * Displays the front element without removing it.
+     * Time Complexity: O(1)
+     */
     @Override
     public void peekFood() {
         if (isEmpty()) {
@@ -67,6 +96,10 @@ public class Queue implements FoodStorage {
         }
     }
 
+    /**
+     * Displays all elements in the queue.
+     * Time Complexity: O(n)
+     */
     @Override
     public void displayFood() {
         if (isEmpty()) {
@@ -80,6 +113,10 @@ public class Queue implements FoodStorage {
         }
     }
 
+    /**
+     * Displays the number of elements in the queue.
+     * Time Complexity: O(1)
+     */
     @Override
     public void size() {
         if (isEmpty()) {
