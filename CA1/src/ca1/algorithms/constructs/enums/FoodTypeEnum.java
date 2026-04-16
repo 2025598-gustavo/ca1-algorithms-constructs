@@ -23,6 +23,8 @@ public enum FoodTypeEnum {
 
     /**
      * Converts user input into enum.
+     * @param choice
+     * @return 
      */
     public static FoodTypeEnum fromChoice(int choice) {
         return switch (choice) {
